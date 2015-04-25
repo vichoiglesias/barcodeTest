@@ -1,0 +1,36 @@
+<head>
+  <title>Barcode Reader + Meteor</title>
+</head>
+
+<body>
+  {{> detectKeys}}
+</body>
+
+<template name="detectKeys">
+  <h1>Detectando códigos...</h1>
+  <p>Código detectado: {{detected}}</p>
+  {{#with producto}}
+    <img src={{url_imagen}} style="max-width:300px">
+    <h3>Producto: {{nombre}}</h3>
+    <p><b>Valor:</b> ${{valor}}</p>
+    <p><b>Descripción:</b> {{descripcion}}</p>
+  {{else}}
+    {{#if detected}}
+      <p><b>No se ha encontrado un producto asociado a ese código.</b></p>
+      {{>newProducto}}
+    {{else}}
+      <b>Escanea un producto para ver su detalle</b>
+    {{/if}}
+  {{/with}}
+</template>
+
+<template name="newProducto">
+<form>
+  Ingresa un nuevo producto:
+  <p><b>Nombre:</b><br> <input id="nombre"/></p>
+  <p><b>URL imagen:</b><br> <input id="url_imagen"/></p>
+  <p><b>Valor:</b><br> <input id="valor"/></p>
+  <p><b>Descripción:</b><br> <textarea id="descripcion"></textarea></p>
+  <input type="submit" value="Ingresar"/>
+</form>
+</template>
